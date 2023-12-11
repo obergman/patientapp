@@ -1,0 +1,23 @@
+.dialog {
+  width: 350px;
+  min-height: 300px;
+
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.genderContainer {
+  margin-bottom: 15px;
+}

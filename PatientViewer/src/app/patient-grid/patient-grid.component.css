@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#patientsTable {
+    margin: 10px;
+    width: 100%;
+}
+
+.space {
+    flex: 1;
+}

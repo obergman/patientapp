@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Patient #{{patient.id}} {{patient.lastName}}, {{patient.firstName}}</h1>
+<mat-dialog-content class="dialog">
+  <!-- <div mat-dialog-content> -->
+  <div class="container">
+
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="First Name" [(ngModel)]="patient.firstName">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Last Name" [(ngModel)]="patient.lastName">
+    </mat-form-field>
+
+    <div class="genderContainer">
+      <div>
+        Gender
+      </div>
+      <mat-radio-group aria-label="Select gender" [(ngModel)]="patient.gender">
+        <mat-radio-button value="M">Male</mat-radio-button>
+        <mat-radio-button value="F">Female</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <mat-form-field>
+      <mat-label>DOB</mat-label>
+      <input matInput placeholder="DOB" [(ngModel)]="patient.dob" [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
+
+  </div>
+
+  <!-- </div> -->
+</mat-dialog-content>
+<div mat-dialog-actions class="footer">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="close()" cdkFocusInitial>Save</button>
+</div>

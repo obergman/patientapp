@@ -1,0 +1,81 @@
+<div *ngIf="loaded">
+
+	<div *ngIf="dataSource.data.length<=0">
+		Please start by importing patient data using the button below.
+		<br>
+	</div>
+
+	<div class="header">
+
+
+
+		<mat-form-field *ngIf="dataSource.data.length>0">
+			<mat-label>Filter</mat-label>
+			<input matInput type="text" placeholder="No filter" [(ngModel)]="searchValue" (keyup)="applyFilter()"
+				#filter>
+			<button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
+				(click)="searchValue=''; applyFilter()">
+				<mat-icon>close</mat-icon>
+			</button>
+		</mat-form-field>
+
+		<div class="space"></div>
+
+		<app-file-import (afterImport)="getdata()"></app-file-import>
+
+	</div>
+
+
+	<table *ngIf="dataSource.data.length>0" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"
+		(matSortChange)="sortData($event)">
+
+		<ng-container matColumnDef="id">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+			<td mat-cell *matCellDef="let element"> {{element.id}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="firstName">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> First </th>
+			<td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="lastName">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Last </th>
+			<td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="gender">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+			<td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="dob">
+			<th mat-header-cell *matHeaderCellDef> DOB </th>
+			<td mat-cell *matCellDef="let element"> {{element.dob | date:'shortDate'}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="edit">
+			<th mat-header-cell *matHeaderCellDef> </th>
+			<td mat-cell *matCellDef="let element">
+				<button mat-icon-button (click)="edit(element)">
+					<mat-icon>edit</mat-icon>
+				</button>
+				<button mat-icon-button (click)="delete(element)">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="delete">
+			<th mat-header-cell *matHeaderCellDef> </th>
+			<td mat-cell *matCellDef="let element">
+
+			</td>
+		</ng-container>
+
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="select(row)"></tr>
+	</table>
+
+</div>

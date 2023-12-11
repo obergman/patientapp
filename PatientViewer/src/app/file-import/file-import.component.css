@@ -1,0 +1,8 @@
+.file-input {
+  display: none;
+}
+
+.header {
+  display: flex;
+  justify-content: end;
+}

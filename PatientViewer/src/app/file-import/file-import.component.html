@@ -1,0 +1,14 @@
+<div class="header">
+
+  <input type="file" aria-label="file input" class="file-input" [accept]="requiredFileType"
+    (change)="onFileSelected($event)" #fileUpload>
+
+  <div>
+
+    <button mat-raised-button color="primary" (click)="fileUpload.click()">
+      Import File...
+    </button>
+
+  </div>
+
+</div>
