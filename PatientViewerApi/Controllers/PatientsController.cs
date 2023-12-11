@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PatientViewerApi.Models;
 
@@ -27,9 +21,7 @@ namespace PatientViewerApi.Controllers
         {
             var files = Request.Form.Files;
             var file = files[0];
-            var fileExtension = Path.GetExtension(file.FileName);
-            //var newFilename = fileGuid + fileExtension;
-            //if (isUploaded)
+                      
             if (file.Length > 0)
             {
                 using (Stream stream = file.OpenReadStream())
@@ -46,9 +38,7 @@ namespace PatientViewerApi.Controllers
                         while (!sr.EndOfStream)
                         {
                             var line = sr.ReadLine();
-
                             var items = line.Split(',');
-
                             var p = new Patient();
 
                             p.FirstName = items[0];
@@ -57,8 +47,6 @@ namespace PatientViewerApi.Controllers
                             p.Gender = items[3];
 
                             arr.Add(p);
-
-                            Console.WriteLine(line);
                         }
                         sr.Close();
 
@@ -69,7 +57,7 @@ namespace PatientViewerApi.Controllers
                     }
                     catch (Exception e)
                     {
-                        //Log.Logger.Error(e, "Image processing error");
+                        Console.WriteLine(e.Message);
 
                     }
                     finally
