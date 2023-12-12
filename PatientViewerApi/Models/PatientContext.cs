@@ -5,7 +5,7 @@ namespace PatientViewerApi.Models
 {
     public partial class PatientContext : DbContext
     {
-        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Patient>? Patients { get; set; }
 
         public string DbPath { get; private set; }
 

@@ -38,20 +38,25 @@ namespace PatientViewerApi.Controllers
                         while (!sr.EndOfStream)
                         {
                             var line = sr.ReadLine();
-                            var items = line.Split(',');
-                            var p = new Patient();
 
-                            p.FirstName = items[0];
-                            p.LastName = items[1];
-                            p.Dob = DateTime.Parse(items[2]);
-                            p.Gender = items[3];
+                            var items = line?.Split(',');
 
-                            arr.Add(p);
+                            if (items?.Length >= 4)
+                            {
+                                var p = new Patient();
+
+                                p.FirstName = items[0];
+                                p.LastName = items[1];
+                                p.Dob = DateTime.Parse(items[2]);
+                                p.Gender = items[3];
+
+                                arr.Add(p);
+                            }
                         }
                         sr.Close();
 
                         // commit
-                        _context.Patients.AddRange(arr);
+                        _context.Patients?.AddRange(arr);
                         _context.SaveChanges();
 
                     }

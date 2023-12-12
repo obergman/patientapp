@@ -1,15 +1,20 @@
 <div *ngIf="loaded" class="column">
 
-	<div *ngIf="dataSource.data.length<=0">
-		Please start by importing patient data using the button below.
-		<br>
+	<div *ngIf="dataSource.data.length<=0" class="startermessage">
+		
+		<div>
+		<b>Please begin by importing patient data by clicking the button below.</b>
+		</div>
+		 <br>
+		 <app-file-import (afterImport)="getdata()"></app-file-import>
+		 
 	</div>
 
 	<div class="container">
 
-		<div class="toolbar">
+		<div class="toolbar" *ngIf="dataSource.data.length>0">
 
-			<mat-form-field *ngIf="dataSource.data.length>0" class="filter">
+			<mat-form-field  class="filter">
 				<input matInput type="text" placeholder="No filter" [(ngModel)]="searchValue" (keyup)="applyFilter()"
 					#filter>
 				<button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
