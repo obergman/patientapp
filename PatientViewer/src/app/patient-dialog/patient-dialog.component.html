@@ -1,6 +1,5 @@
-<h1 mat-dialog-title>Patient #{{patient.id}} {{patient.lastName}}, {{patient.firstName}}</h1>
+<h1 mat-dialog-title>Patient #{{data.id}} {{data.firstName}} {{data.lastName}}</h1>
 <mat-dialog-content class="dialog">
-  <!-- <div mat-dialog-content> -->
   <div class="container">
 
     <mat-form-field>
@@ -31,12 +30,9 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-
-
   </div>
-
-  <!-- </div> -->
 </mat-dialog-content>
+
 <div mat-dialog-actions class="footer">
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-raised-button color="primary" (click)="close()" cdkFocusInitial>Save</button>

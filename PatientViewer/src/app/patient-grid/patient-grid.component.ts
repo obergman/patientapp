@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { FileImportComponent } from '../file-import/file-import.component';
 import { CommonService } from '../common.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-patient-grid',
@@ -19,7 +20,7 @@ import { CommonService } from '../common.service';
   styleUrls: ['./patient-grid.component.css'],
   standalone: true,
   imports: [MatTableModule, FileImportComponent, MatDialogModule, MatSortModule, MatIconModule, FormsModule, MatIconModule,
-    MatInputModule, MatFormFieldModule, MatButtonModule, CommonModule,]
+    MatInputModule, MatFormFieldModule, MatButtonModule, CommonModule]
 })
 export class PatientGridComponent implements OnInit, AfterViewInit {
 
@@ -28,19 +29,29 @@ export class PatientGridComponent implements OnInit, AfterViewInit {
   loaded: boolean = false;
   selectedRow: any;
   dataSource = new MatTableDataSource(this.patients);
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'gender', 'dob', 'edit', 'delete'];
+  displayedColumns: string[] =  ['id', 'firstName', 'lastName', 'gender', 'dob', 'edit', 'delete'];
 
   @ViewChild(MatSort) sort!: MatSort;
+
   @Input() searchValue: string = "";
 
   constructor(
     private patientService: PatientserviceService,
-    private commonSvc: CommonService
-    , public dialog: MatDialog) { }
+    private commonSvc: CommonService,
+    breakpointObserver: BreakpointObserver
+    , public dialog: MatDialog) { 
+      
+      breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+        this.displayedColumns = result.matches ? 
+          ['id','firstName', 'lastName', 'edit', 'delete']: 
+          ['id', 'firstName', 'lastName', 'gender', 'dob', 'edit', 'delete'];
+      });
+
+    }
 
   getdata() {
     this.patientService.getPatients().subscribe((data) => {
-      this.dataSource.data = data as Patient[];
+      this.dataSource.data = data as Patient[];      
       this.loaded = true;
     });
 
@@ -51,7 +62,7 @@ export class PatientGridComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort;    
   }
 
   ngOnInit(): void {
@@ -112,6 +123,8 @@ export class PatientGridComponent implements OnInit, AfterViewInit {
     this.dataSource.data = this.dataSource.data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
+        case 'id':
+          return this.compare(a.id, b.id, isAsc);
         case 'firstName':
           return this.compare(a.firstName, b.firstName, isAsc);
         case 'lastName':

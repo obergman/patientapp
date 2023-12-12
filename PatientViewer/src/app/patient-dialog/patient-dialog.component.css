@@ -1,6 +1,6 @@
 .dialog {
-  width: 350px;
-  min-height: 300px;
+  max-width: 350px;
+  height: 360px;
 
 }
 
@@ -9,7 +9,6 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-
 }
 
 .footer {

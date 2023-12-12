@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { PatientGridComponent } from './patient-grid/patient-grid.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FileImportComponent } from './file-import/file-import.component';

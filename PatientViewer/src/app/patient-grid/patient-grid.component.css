@@ -1,16 +1,39 @@
-.header {
+.toolbar {
     display: flex;
     direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 5px;   
 }
 
-#patientsTable {
-    margin: 10px;
-    width: 100%;
+
+
+@media only screen and (max-width: 600px) {
+    .filter {
+      width: 150px;
+    }
+  }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    height: 100%;
+    width: 80%;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+      width: 95%;
+    }
+  }
+
+.table {
+   margin-bottom: 50px;
 }
 
 .space {
     flex: 1;
 }
+
