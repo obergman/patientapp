@@ -1,9 +1,9 @@
+# Instructions #
 
-# Run backend
+## Run .NET backend web api (SQL database will generate automatically on run) ##
 dotnet build
 dotnet run
 
-
-# Run Angular app\
+## Run Angular app ##
 npm install
 ng serve
